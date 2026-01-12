@@ -1,20 +1,36 @@
-<<<<<<< HEAD
-# excelerate
+# LearnSphere
 
-A new Flutter project.
+## Project Vision
+LearnSphere is a cross-platform educational application built with Flutter. 
+It is designed to bridge the gap between learners and administrators in structured learning environments by providing role-based interfaces that simplify course management and enhance the learning experience.
 
-## Getting Started
+## Objectives
+- Provide learners with easy access to programs, learning materials, and progress tracking
+- Enable administrators to create, manage, and monitor educational programs efficiently
+- Support secure, responsive, and accessible usage across Android, iOS, and Web platforms
+- Improve communication between learners and administrators
 
-This project is a starting point for a Flutter application.
+## Target Users
+- **Learners:** Students and trainees who access courses, complete modules, and track progress
+- **Administrators:** Instructors and institutional managers who create programs, manage users, and analyze performance
 
-A few resources to get you started if this is your first Flutter project:
+## Navigation Flow
+### Learner Flow
+1. User logs in as a Learner
+2. Learner is taken to the Home Dashboard
+3. Learner browses programs from the Program Listing page
+4. Learner selects a program to view details and modules
+5. Learner tracks progress and submits assignments
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Admin Flow
+1. User logs in as an Admin
+2. Admin accesses the Admin Dashboard
+3. Admin creates or manages programs
+4. Admin manages learners and views analytics
+5. Admin publishes announcements and reports
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# Team7-Excelerate-Flutter-Project
->>>>>>> 8d69e33bc4f4e23e81021f1b28cb3551875fd79f
+## Technology Stack
+- Flutter (Dart)
+- Firebase Authentication & Firestore
+- Provider / Riverpod for state management
+- Responsive UI for mobile and web
