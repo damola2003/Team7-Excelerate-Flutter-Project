@@ -1,5 +1,5 @@
-import 'package:excelerate/Onboarding-screen.dart';
-import 'package:excelerate/splash-screen.dart';
+import 'package:excelerate/onboarding_screen.dart';
+import 'package:excelerate/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

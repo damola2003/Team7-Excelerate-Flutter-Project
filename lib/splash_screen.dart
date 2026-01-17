@@ -1,4 +1,4 @@
-import 'package:excelerate/Onboarding-screen.dart';
+import 'package:excelerate/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -74,35 +74,39 @@ class _SplashScreenState extends State<SplashScreen> {
              const SizedBox(height: 70),
   
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                      const Text(
-                        "Initializing Core Modules...",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 91, 90, 90),
-                          fontSize: 18,
-                        ),
-                      ),
-                  const SizedBox(width: 78),
-                    Text(
-                      "${(_progress * 100).toInt()}%",
-                      style: const TextStyle(
-                        color: Color(0xFF007A8A),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-             const SizedBox(height: 12),
+  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Flexible(
+        child: Text(
+          "Initializing Core Modules...",
+          style: const TextStyle(
+            color: Color.fromARGB(255, 91, 90, 90),
+            fontSize: 18,
+          ),
+          overflow: TextOverflow.ellipsis, 
+        ),
+      ),
+      const SizedBox(width: 28),
+      // percentage
+      Text(
+        "${(_progress * 100).toInt()}%",
+        style: const TextStyle(
+          color: Color(0xFF007A8A),
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+    ],
+  ),
+),
+         const SizedBox(height: 12),
+         //progress bar
             SizedBox(
-              width: 520,
+              width: 420,
              child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-
               child: LinearProgressIndicator(
                 value: _progress,
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF42A5F5)),
