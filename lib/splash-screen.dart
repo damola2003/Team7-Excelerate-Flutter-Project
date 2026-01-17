@@ -76,16 +76,16 @@ class _SplashScreenState extends State<SplashScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Expanded(
-                      child: Text(
+                      const Text(
                         "Initializing Core Modules...",
                         style: TextStyle(
                           color: Color.fromARGB(255, 91, 90, 90),
                           fontSize: 18,
                         ),
                       ),
-                    ),
+                  const SizedBox(width: 78),
                     Text(
                       "${(_progress * 100).toInt()}%",
                       style: const TextStyle(
@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
              const SizedBox(height: 12),
             SizedBox(
-              width: 420,
+              width: 520,
              child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
 
