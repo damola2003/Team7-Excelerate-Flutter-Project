@@ -1,3 +1,4 @@
+import 'package:excelerate/login_screen.dart';
 import 'package:excelerate/onboarding_screen.dart';
 import 'package:excelerate/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       routes: {
         '/onboarding': (context)=>const OnboardingScreen(),
+        '/login': (context)=> const LoginScreen(),
       },
     );
   }
