@@ -1,5 +1,6 @@
 import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
+import 'screens/learner/program_listing_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,13 +8,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'LearnSphere',
-
-      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      home: const ProgramListingScreen(),
     );
   }
 }
