@@ -11,9 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Learn Sphere',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
-      home: const LoginPage(),
+      title: 'LearnSphere',
+
       debugShowCheckedModeBanner: false,
     );
   }
