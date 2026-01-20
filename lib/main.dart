@@ -1,8 +1,4 @@
-
-
-import 'package:excelerate/login_screen.dart';
-import 'package:excelerate/onboarding_screen.dart';
-import 'package:excelerate/splash_screen.dart';
+import 'package:excelerate/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,14 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-    
-      home: const SplashScreen(),
-      routes: {
-        '/onboarding': (context)=>const OnboardingScreen(),
-        '/login': (context)=> const LoginScreen(),
-      },
+      title: 'Learn Sphere',
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
+      home: const LoginPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
