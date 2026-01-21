@@ -1,6 +1,9 @@
 //This is the login page of the application
 
+import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -162,7 +165,8 @@ class _LoginPageState extends State<LoginPage> {
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(16),
                           hintText: '********',
-                          hintStyle: TextStyle(color: Colors.grey, letterSpacing: 2),
+                          hintStyle:
+                              TextStyle(color: Colors.grey, letterSpacing: 2),
                         ),
                         style: const TextStyle(
                           fontSize: 16,
@@ -190,7 +194,11 @@ class _LoginPageState extends State<LoginPage> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle login logic
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MainNavigation()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
