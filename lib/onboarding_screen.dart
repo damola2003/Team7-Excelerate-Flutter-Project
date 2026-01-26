@@ -1,3 +1,5 @@
+
+
 import 'package:excelerate/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -179,7 +181,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginScreen (),
+                builder: (context) => const LoginPage(),
               ),
             );
           } else {
