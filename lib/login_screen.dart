@@ -4,7 +4,7 @@ import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
 
 // Import other pages
-import 'home_page.dart';
+import 'home_page.dart' hide HomePage;
 import 'forgot_password_page.dart';
 import 'signup_page.dart';
 
