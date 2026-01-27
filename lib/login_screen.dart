@@ -4,7 +4,7 @@ import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
 
 // Import other pages
-import 'home_page.dart' hide HomePage;
+
 import 'forgot_password_page.dart';
 import 'signup_page.dart';
 
@@ -23,23 +23,23 @@ class _LoginPageState extends State<LoginPage> {
   // Email validation regex
   String? _emailError;
 
-void _validateEmail(String value) {
-  final emailRegex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
-  
-  if (value.isEmpty) {
-    setState(() {
-      _emailError = 'Email is required';
-    });
-  } else if (!emailRegex.hasMatch(value)) {
-    setState(() {
-      _emailError = 'Please enter a valid email address';
-    });
-  } else {
-    setState(() {
-      _emailError = null;
-    });
+  void _validateEmail(String value) {
+    final emailRegex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+
+    if (value.isEmpty) {
+      setState(() {
+        _emailError = 'Email is required';
+      });
+    } else if (!emailRegex.hasMatch(value)) {
+      setState(() {
+        _emailError = 'Please enter a valid email address';
+      });
+    } else {
+      setState(() {
+        _emailError = null;
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -92,68 +92,69 @@ void _validateEmail(String value) {
               const SizedBox(height: 4),
               Text(
                 'Sign in to continue your learning journey',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
 
               const SizedBox(height: 40),
 
               // Email Input
-                Text(
-                  'Email Address',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[700],
+              Text(
+                'Email Address',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[700],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: _emailError != null
+                        ? Colors.red[300]!
+                        : Colors.grey[300]!,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.all(16),
+                    hintText: 'name@example.com',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    suffixIcon:
+                        _emailController.text.isNotEmpty && _emailError == null
+                        ? Icon(
+                            Icons.check_circle,
+                            color: Colors.green[400],
+                            size: 20,
+                          )
+                        : null,
+                  ),
+                  style: const TextStyle(fontSize: 16),
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: _validateEmail,
+                ),
+              ),
+              if (_emailError != null) ...[
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    _emailError!,
+                    style: TextStyle(color: Colors.red[600], fontSize: 12),
                   ),
                 ),
-                const SizedBox(height: 8),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: _emailError != null ? Colors.red[300]! : Colors.grey[300]!,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.all(16),
-                      hintText: 'name@example.com',
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      suffixIcon: _emailController.text.isNotEmpty && _emailError == null
-                          ? Icon(Icons.check_circle, color: Colors.green[400], size: 20)
-                          : null,
-                    ),
-                    style: const TextStyle(fontSize: 16),
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: _validateEmail,
-                  ),
-                ),
-                if (_emailError != null) ...[
-                  const SizedBox(height: 4),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      _emailError!,
-                      style: TextStyle(
-                        color: Colors.red[600],
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
+              ],
 
               // Password Input with Forgot Password
               Row(
@@ -212,13 +213,12 @@ void _validateEmail(String value) {
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(16),
                           hintText: '********',
-                          hintStyle:
-                              TextStyle(color: Colors.grey, letterSpacing: 2),
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            letterSpacing: 2,
+                          ),
                         ),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 2,
-                        ),
+                        style: const TextStyle(fontSize: 16, letterSpacing: 2),
                       ),
                     ),
                     Padding(
@@ -230,7 +230,9 @@ void _validateEmail(String value) {
                           });
                         },
                         child: Icon(
-                          _obscurePassword ? Icons.lock_outline : Icons.lock_open,
+                          _obscurePassword
+                              ? Icons.lock_outline
+                              : Icons.lock_open,
                           color: Colors.grey[600],
                           size: 20,
                         ),
@@ -276,7 +278,7 @@ void _validateEmail(String value) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const HomePage(),
+                              builder: (context) => const MainNavigation(),
                             ),
                           );
                         },
@@ -295,7 +297,9 @@ void _validateEmail(String value) {
                           height: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
                           ),
                         )
                       : const Text(
@@ -314,10 +318,7 @@ void _validateEmail(String value) {
               Row(
                 children: [
                   Expanded(
-                    child: Divider(
-                      color: Colors.grey[300],
-                      thickness: 1,
-                    ),
+                    child: Divider(color: Colors.grey[300], thickness: 1),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -331,10 +332,7 @@ void _validateEmail(String value) {
                     ),
                   ),
                   Expanded(
-                    child: Divider(
-                      color: Colors.grey[300],
-                      thickness: 1,
-                    ),
+                    child: Divider(color: Colors.grey[300], thickness: 1),
                   ),
                 ],
               ),
@@ -355,13 +353,13 @@ void _validateEmail(String value) {
                       setState(() {
                         _isLoading = true;
                       });
-                      
+
                       await Future.delayed(const Duration(seconds: 1));
-                      
+
                       setState(() {
                         _isLoading = false;
                       });
-                      
+
                       // Navigate to home after successful social login
                       Navigator.push(
                         context,
@@ -382,13 +380,13 @@ void _validateEmail(String value) {
                       setState(() {
                         _isLoading = true;
                       });
-                      
+
                       await Future.delayed(const Duration(seconds: 1));
-                      
+
                       setState(() {
                         _isLoading = false;
                       });
-                      
+
                       // Navigate to home after successful social login
                       Navigator.push(
                         context,
@@ -410,10 +408,7 @@ void _validateEmail(String value) {
                   children: [
                     Text(
                       'New to Learn Sphere? ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -487,11 +482,7 @@ class SocialLoginButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: color,
-              size: 24,
-            ),
+            Icon(icon, color: color, size: 24),
             const SizedBox(width: 12),
             Text(
               label,

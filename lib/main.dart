@@ -1,9 +1,9 @@
 import 'package:excelerate/onboarding_screen.dart';
 import 'package:excelerate/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:excelerate/home_page.dart';
-import 'package:excelerate/forgot_password_page.dart';
-import 'package:excelerate/signup_page.dart';
+// import 'package:excelerate/home_page.dart';
+// import 'package:excelerate/forgot_password_page.dart';
+// import 'package:excelerate/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
