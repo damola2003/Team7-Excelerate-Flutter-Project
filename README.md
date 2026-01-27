@@ -1,13 +1,38 @@
-Project Overview
-This repository contains the Week 2 progress for the LearnSphere mobile application. The goal for this week was to transition from wireframes to a functional Flutter UI prototype consisting of four core screens.
+## Program Listing App – Week 3 Update
 
- Features Implemented
-Onboarding & Splash Flow: A multi-step onboarding process with "Next" and "Get Started" buttons.
+##  Project Overview
+This is a Flutter-based mobile application developed as part of a weekly task submission. The app focuses on displaying program information dynamically and implementing basic form functionality with validation.
 
-Home Screen: Features a personalized "Welcome" message, a visual progress tracker (60% completed), and a list of enrolled courses.
+---
 
-Program Listing: A dedicated screen displaying available programs such as "Introduction to Flutter" and "Advanced Data Structures".
+##  Week 3 Features Implemented
 
-Program Details: Interactive cards that navigate to a detailed view showing course duration (e.g., 8 weeks), difficulty level, and learning objectives.
+### 🔹 Dynamic Data Integration
+- The Program Listing screen now fetches data from a sample JSON source instead of using hardcoded values.
+- When a program is selected, the Program Details screen displays the correct information for that program.
+- A loading indicator is shown while data is being fetched.
 
-Bottom Navigation: A functional navigation bar to switch between Home, Courses, and Profile views.
+---
+
+### 🔹 Sign-Up Form
+- A functional sign-up form was added to the application.
+- The form includes email and password input fields and a submit button.
+- Validation ensures required fields are not left empty.
+- User-friendly feedback is shown when invalid input is entered.
+
+---
+
+### 🔹 Loading and Error Handling
+- A loading indicator is displayed while screens or data are being prepared.
+- The app handles invalid input gracefully without crashing.
+- Clear feedback is provided when actions cannot be completed.
+
+---
+
+## 🛠️ Technologies Used
+- Flutter
+- Dart
+- Sample JSON (Mock Data)
+
+---
+
