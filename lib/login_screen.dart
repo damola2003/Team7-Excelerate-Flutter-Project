@@ -1,5 +1,6 @@
 //This is the login page of the application
 
+import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
 
 // Import other pages
@@ -211,7 +212,8 @@ void _validateEmail(String value) {
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(16),
                           hintText: '********',
-                          hintStyle: TextStyle(color: Colors.grey, letterSpacing: 2),
+                          hintStyle:
+                              TextStyle(color: Colors.grey, letterSpacing: 2),
                         ),
                         style: const TextStyle(
                           fontSize: 16,
