@@ -3,7 +3,10 @@
 import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
 
+// Import other pages
 
+import 'forgot_password_page.dart';
+import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,7 +18,28 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final bool _obscurePassword = true;
+  bool _obscurePassword = true;
+  bool _isLoading = false;
+  // Email validation regex
+  String? _emailError;
+
+  void _validateEmail(String value) {
+    final emailRegex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+
+    if (value.isEmpty) {
+      setState(() {
+        _emailError = 'Email is required';
+      });
+    } else if (!emailRegex.hasMatch(value)) {
+      setState(() {
+        _emailError = 'Please enter a valid email address';
+      });
+    } else {
+      setState(() {
+        _emailError = null;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 4),
               Text(
                 'Sign in to continue your learning journey',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
 
               const SizedBox(height: 40),
@@ -90,7 +111,11 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.grey[300]!),
+                  border: Border.all(
+                    color: _emailError != null
+                        ? Colors.red[300]!
+                        : Colors.grey[300]!,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.05),
@@ -101,20 +126,37 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: TextField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(16),
+                    contentPadding: const EdgeInsets.all(16),
                     hintText: 'name@example.com',
-                    hintStyle: TextStyle(color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    suffixIcon:
+                        _emailController.text.isNotEmpty && _emailError == null
+                        ? Icon(
+                            Icons.check_circle,
+                            color: Colors.green[400],
+                            size: 20,
+                          )
+                        : null,
                   ),
                   style: const TextStyle(fontSize: 16),
                   keyboardType: TextInputType.emailAddress,
+                  onChanged: _validateEmail,
                 ),
               ),
+              if (_emailError != null) ...[
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    _emailError!,
+                    style: TextStyle(color: Colors.red[600], fontSize: 12),
+                  ),
+                ),
+              ],
 
-              const SizedBox(height: 24),
-
-              // Password Input
+              // Password Input with Forgot Password
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -128,7 +170,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigate to forgot password screen
+                      // Navigate to forgot password page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordPage(),
+                        ),
+                      );
                     },
                     child: Text(
                       'FORGOT?',
@@ -165,21 +213,29 @@ class _LoginPageState extends State<LoginPage> {
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(16),
                           hintText: '********',
-                          hintStyle:
-                              TextStyle(color: Colors.grey, letterSpacing: 2),
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            letterSpacing: 2,
+                          ),
                         ),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 2,
-                        ),
+                        style: const TextStyle(fontSize: 16, letterSpacing: 2),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 16),
-                      child: Icon(
-                        _obscurePassword ? Icons.lock_outline : Icons.lock_open,
-                        color: Colors.grey[600],
-                        size: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        child: Icon(
+                          _obscurePassword
+                              ? Icons.lock_outline
+                              : Icons.lock_open,
+                          color: Colors.grey[600],
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],
@@ -193,13 +249,39 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MainNavigation()),
-                    );
-                  },
+                  onPressed: _isLoading
+                      ? null
+                      : () async {
+                          // Basic validation
+                          if (_emailController.text.isEmpty ||
+                              _passwordController.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please fill in all fields'),
+                              ),
+                            );
+                            return;
+                          }
+
+                          setState(() {
+                            _isLoading = true;
+                          });
+
+                          // Simulate API call delay
+                          await Future.delayed(const Duration(seconds: 1));
+
+                          setState(() {
+                            _isLoading = false;
+                          });
+
+                          // Navigate to home page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MainNavigation(),
+                            ),
+                          );
+                        },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
                     foregroundColor: Colors.white,
@@ -209,13 +291,24 @@ class _LoginPageState extends State<LoginPage> {
                     elevation: 0,
                     shadowColor: Colors.transparent,
                   ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  child: _isLoading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        )
+                      : const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                 ),
               ),
 
@@ -225,10 +318,7 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 children: [
                   Expanded(
-                    child: Divider(
-                      color: Colors.grey[300],
-                      thickness: 1,
-                    ),
+                    child: Divider(color: Colors.grey[300], thickness: 1),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -242,10 +332,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Expanded(
-                    child: Divider(
-                      color: Colors.grey[300],
-                      thickness: 1,
-                    ),
+                    child: Divider(color: Colors.grey[300], thickness: 1),
                   ),
                 ],
               ),
@@ -261,7 +348,26 @@ class _LoginPageState extends State<LoginPage> {
                     icon: Icons.apple,
                     label: 'Apple',
                     color: Colors.black,
-                    onPressed: () {},
+                    onPressed: () async {
+                      // Simulate Apple sign in process
+                      setState(() {
+                        _isLoading = true;
+                      });
+
+                      await Future.delayed(const Duration(seconds: 1));
+
+                      setState(() {
+                        _isLoading = false;
+                      });
+
+                      // Navigate to home after successful social login
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(width: 16),
                   // Google Button
@@ -269,7 +375,26 @@ class _LoginPageState extends State<LoginPage> {
                     icon: Icons.g_mobiledata,
                     label: 'Google',
                     color: const Color(0xFFDB4437),
-                    onPressed: () {},
+                    onPressed: () async {
+                      // Simulate Google sign in process
+                      setState(() {
+                        _isLoading = true;
+                      });
+
+                      await Future.delayed(const Duration(seconds: 1));
+
+                      setState(() {
+                        _isLoading = false;
+                      });
+
+                      // Navigate to home after successful social login
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -283,14 +408,17 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'New to Learn Sphere? ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigate to sign up screen
+                        // Navigate to sign up page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupPage(),
+                          ),
+                        );
                       },
                       child: Text(
                         'Create Account',
@@ -354,11 +482,7 @@ class SocialLoginButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: color,
-              size: 24,
-            ),
+            Icon(icon, color: color, size: 24),
             const SizedBox(width: 12),
             Text(
               label,

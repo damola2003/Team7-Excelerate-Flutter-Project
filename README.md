@@ -1,36 +1,13 @@
-# LearnSphere
+Project Overview
+This repository contains the Week 2 progress for the LearnSphere mobile application. The goal for this week was to transition from wireframes to a functional Flutter UI prototype consisting of four core screens.
 
-## Project Vision
-LearnSphere is a cross-platform educational application built with Flutter. 
-It is designed to bridge the gap between learners and administrators in structured learning environments by providing role-based interfaces that simplify course management and enhance the learning experience.
+ Features Implemented
+Onboarding & Splash Flow: A multi-step onboarding process with "Next" and "Get Started" buttons.
 
-## Objectives
-- Provide learners with easy access to programs, learning materials, and progress tracking
-- Enable administrators to create, manage, and monitor educational programs efficiently
-- Support secure, responsive, and accessible usage across Android, iOS, and Web platforms
-- Improve communication between learners and administrators
+Home Screen: Features a personalized "Welcome" message, a visual progress tracker (60% completed), and a list of enrolled courses.
 
-## Target Users
-- **Learners:** Students and trainees who access courses, complete modules, and track progress
-- **Administrators:** Instructors and institutional managers who create programs, manage users, and analyze performance
+Program Listing: A dedicated screen displaying available programs such as "Introduction to Flutter" and "Advanced Data Structures".
 
-## Navigation Flow
-### Learner Flow
-1. User logs in as a Learner
-2. Learner is taken to the Home Dashboard
-3. Learner browses programs from the Program Listing page
-4. Learner selects a program to view details and modules
-5. Learner tracks progress and submits assignments
+Program Details: Interactive cards that navigate to a detailed view showing course duration (e.g., 8 weeks), difficulty level, and learning objectives.
 
-### Admin Flow
-1. User logs in as an Admin
-2. Admin accesses the Admin Dashboard
-3. Admin creates or manages programs
-4. Admin manages learners and views analytics
-5. Admin publishes announcements and reports
-
-## Technology Stack
-- Flutter (Dart)
-- Firebase Authentication & Firestore
-- Provider / Riverpod for state management
-- Responsive UI for mobile and web
+Bottom Navigation: A functional navigation bar to switch between Home, Courses, and Profile views.
