@@ -5,6 +5,7 @@ import 'package:excelerate/forgot_password_page.dart';
 import 'package:excelerate/signup_page.dart';
 
 void main() {
+  
   runApp(const MyApp());
 }
 

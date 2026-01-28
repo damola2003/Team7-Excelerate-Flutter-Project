@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876045336744",
+    "project_id": "learn-sphere-59b7f",
+    "storage_bucket": "learn-sphere-59b7f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876045336744:android:e4ce0b45fb3e0b7276029d",
+        "android_client_info": {
+          "package_name": "com.example.excelerate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJnDXRqFYsrrgejQ7tZhPXUINuNb56moY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
