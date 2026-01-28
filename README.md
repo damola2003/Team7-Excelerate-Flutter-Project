@@ -1,36 +1,38 @@
-# LearnSphere
+## Program Listing App – Week 3 Update
 
-## Project Vision
-LearnSphere is a cross-platform educational application built with Flutter. 
-It is designed to bridge the gap between learners and administrators in structured learning environments by providing role-based interfaces that simplify course management and enhance the learning experience.
+##  Project Overview
+This is a Flutter-based mobile application developed as part of a weekly task submission. The app focuses on displaying program information dynamically and implementing basic form functionality with validation.
 
-## Objectives
-- Provide learners with easy access to programs, learning materials, and progress tracking
-- Enable administrators to create, manage, and monitor educational programs efficiently
-- Support secure, responsive, and accessible usage across Android, iOS, and Web platforms
-- Improve communication between learners and administrators
+---
 
-## Target Users
-- **Learners:** Students and trainees who access courses, complete modules, and track progress
-- **Administrators:** Instructors and institutional managers who create programs, manage users, and analyze performance
+##  Week 3 Features Implemented
 
-## Navigation Flow
-### Learner Flow
-1. User logs in as a Learner
-2. Learner is taken to the Home Dashboard
-3. Learner browses programs from the Program Listing page
-4. Learner selects a program to view details and modules
-5. Learner tracks progress and submits assignments
+### 🔹 Dynamic Data Integration
+- The Program Listing screen now fetches data from a sample JSON source instead of using hardcoded values.
+- When a program is selected, the Program Details screen displays the correct information for that program.
+- A loading indicator is shown while data is being fetched.
 
-### Admin Flow
-1. User logs in as an Admin
-2. Admin accesses the Admin Dashboard
-3. Admin creates or manages programs
-4. Admin manages learners and views analytics
-5. Admin publishes announcements and reports
+---
 
-## Technology Stack
-- Flutter (Dart)
-- Firebase Authentication & Firestore
-- Provider / Riverpod for state management
-- Responsive UI for mobile and web
+### 🔹 Sign-Up Form
+- A functional sign-up form was added to the application.
+- The form includes email and password input fields and a submit button.
+- Validation ensures required fields are not left empty.
+- User-friendly feedback is shown when invalid input is entered.
+
+---
+
+### 🔹 Loading and Error Handling
+- A loading indicator is displayed while screens or data are being prepared.
+- The app handles invalid input gracefully without crashing.
+- Clear feedback is provided when actions cannot be completed.
+
+---
+
+## 🛠️ Technologies Used
+- Flutter
+- Dart
+- Sample JSON (Mock Data)
+
+---
+

@@ -1,5 +1,6 @@
+import 'package:excelerate/home.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
