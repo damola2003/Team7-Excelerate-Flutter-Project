@@ -1,9 +1,28 @@
+import 'package:excelerate/screens/learner/program_listing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../models/module.dart';
 import '../../models/assignment.dart';
 import '../../models/discussion_thread.dart';
 import '../../services/program_service.dart';
+
+class ResponsiveLayout {
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 600;
+
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 600 &&
+      MediaQuery.of(context).size.width < 1200;
+
+  static bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1200;
+
+  static int getGridCrossAxisCount(BuildContext context) {
+    if (isDesktop(context)) return 4;
+    if (isTablet(context)) return 3;
+    return 2;
+  }
+}
 
 class ProgramDetailsScreen extends StatefulWidget {
   final String programId;
@@ -318,44 +337,93 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen>
             style: TextStyle(fontSize: 16, color: Colors.grey[700]),
           ),
           const SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(
-                child: _buildInfoCard(
-                  Icons.signal_cellular_alt,
-                  'Difficulty',
-                  _programData!['difficulty'],
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildInfoCard(
-                  Icons.access_time,
-                  'Duration',
-                  _programData!['duration'],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _buildInfoCard(
-                  Icons.category,
-                  'Category',
-                  _programData!['category'],
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildInfoCard(
-                  Icons.schedule,
-                  'Schedule',
-                  _programData!['schedule'],
-                ),
-              ),
-            ],
+          // Course Info Cards - Responsive
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (ResponsiveLayout.isMobile(context)) {
+                // Mobile: 2 columns
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildInfoCard(
+                            Icons.signal_cellular_alt,
+                            'Difficulty',
+                            _programData!['difficulty'],
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildInfoCard(
+                            Icons.access_time,
+                            'Duration',
+                            _programData!['duration'],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildInfoCard(
+                            Icons.category,
+                            'Category',
+                            _programData!['category'],
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildInfoCard(
+                            Icons.schedule,
+                            'Schedule',
+                            _programData!['schedule'],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              } else {
+                // Tablet/Desktop: 4 columns
+                return Row(
+                  children: [
+                    Expanded(
+                      child: _buildInfoCard(
+                        Icons.signal_cellular_alt,
+                        'Difficulty',
+                        _programData!['difficulty'],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildInfoCard(
+                        Icons.access_time,
+                        'Duration',
+                        _programData!['duration'],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildInfoCard(
+                        Icons.category,
+                        'Category',
+                        _programData!['category'],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildInfoCard(
+                        Icons.schedule,
+                        'Schedule',
+                        _programData!['schedule'],
+                      ),
+                    ),
+                  ],
+                );
+              }
+            },
           ),
           const SizedBox(height: 24),
           const Text(

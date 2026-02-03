@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'program_details_screen.dart';
 
+class ResponsiveLayout {
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 600;
+
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 600 &&
+      MediaQuery.of(context).size.width < 1200;
+
+  static bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1200;
+
+  static int getGridCrossAxisCount(BuildContext context) {
+    if (isDesktop(context)) return 4;
+    if (isTablet(context)) return 3;
+    return 2;
+  }
+}
+
 // Simple Program model for the listing
 class ProgramBasic {
   final String id;
@@ -362,6 +380,23 @@ class _ProgramListingScreenState extends State<ProgramListingScreen> {
     );
   }
 
+  Widget _buildGridView() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: ResponsiveLayout.getGridCrossAxisCount(context),
+        childAspectRatio: 0.75,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ),
+      itemCount: _filteredPrograms.length,
+      itemBuilder: (context, index) {
+        final program = _filteredPrograms[index];
+        return _buildProgramGridCard(program);
+      },
+    );
+  }
+
   Widget _buildFilterChip(String label) {
     final isSelected = _selectedFilters.contains(label);
     return Padding(
@@ -389,23 +424,6 @@ class _ProgramListingScreenState extends State<ProgramListingScreen> {
       itemBuilder: (context, index) {
         final program = _filteredPrograms[index];
         return _buildProgramCard(program);
-      },
-    );
-  }
-
-  Widget _buildGridView() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.75,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
-      itemCount: _filteredPrograms.length,
-      itemBuilder: (context, index) {
-        final program = _filteredPrograms[index];
-        return _buildProgramGridCard(program);
       },
     );
   }
